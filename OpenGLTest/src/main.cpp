@@ -118,12 +118,14 @@ int main()
     //GameObjects
     Scene* scene = new Scene(window, shader);
 
-    // configure depth map FBO
+
+
+    //shadow map (no abstraction for first implementationand testing)
     Shader simpleDepthShader("src/DepthShader.vert", "src/DepthShader.frag");
     const unsigned int SHADOW_WIDTH = 4096, SHADOW_HEIGHT = 4096;
     unsigned int depthMapFBO;
     glGenFramebuffers(1, &depthMapFBO);
-    // create depth texture
+
     unsigned int depthMap;
     glGenTextures(1, &depthMap);
     glBindTexture(GL_TEXTURE_2D, depthMap);
@@ -134,7 +136,7 @@ int main()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
     float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-    // attach depth texture as FBO's depth buffer
+
     glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
     glDrawBuffer(GL_NONE);
@@ -159,7 +161,7 @@ int main()
 
 
 
-    //PHYSX
+    //PHYSX (no abstraction for first implementationand testing)
 
 
     //init
@@ -170,7 +172,7 @@ int main()
     physx::PxFoundation* mFoundation;
     mFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, gDefaultAllocatorCallback, gDefaultErrorCallback);
     if (!mFoundation)
-        std::cout << "FATAL ERROR!!: PxCreateFoundation failed!" << std::endl;
+        std::cout << "PHYSX ERROR!!: PxCreateFoundation failed!" << std::endl;
 
     bool recordMemoryAllocations = true;
     
@@ -178,7 +180,7 @@ int main()
     mPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *mFoundation, physx::PxTolerancesScale(), recordMemoryAllocations);
     if (!mPhysics) 
     {
-        std::cout << "FATAL ERROR!!: PxCreatePhysics failed!" << std::endl;
+        std::cout << "PHYSX ERROR!!: PxCreatePhysics failed!" << std::endl;
         return -1;
     }
 
@@ -188,7 +190,7 @@ int main()
     tolerancesScale.speed = 10;
     mCooking = PxCreateCooking(PX_PHYSICS_VERSION, *mFoundation, physx::PxCookingParams(tolerancesScale));
     if (!mCooking)
-        std::cout << "FATAL ERROR!!: PxCreateCooking failed!" << std::endl;
+        std::cout << "PHYSX ERROR!!: PxCreateCooking failed!" << std::endl;
 
 
     //scene
@@ -200,48 +202,44 @@ int main()
     sceneDesc.filterShader = physx::PxDefaultSimulationFilterShader;
     mScene = mPhysics->createScene(sceneDesc);
     if (!mScene)
-        std::cout << "FATAL ERROR!!: createScene failed!" << std::endl;
-    
-    //mScene->setGravity(physx::PxVec3(0.0f, -9.81f, 0.0f));
+        std::cout << "PHYSX ERROR!!: createScene failed!" << std::endl;
+
 
     //material
     physx::PxMaterial* mMaterial;
 
-    mMaterial = mPhysics->createMaterial(0.5f, 0.5f, 0.15f);    //static friction, dynamic friction, restitution
+    mMaterial = mPhysics->createMaterial(0.5f, 0.5f, 0.05f);    //static friction, dynamic friction, restitution
     if (!mMaterial) 
     {
-        std::cout << "FATAL ERROR!!: createMaterial failed!" << std::endl;
+        std::cout << "PHYSX ERROR!!: createMaterial failed!" << std::endl;
         return -1;
     }
 
 
     physx::PxReal denstiy = 10;
-    physx::PxRigidDynamic* aCubeActor = physx::PxCreateDynamic(*mPhysics, physx::PxTransform(physx::PxVec3(0.0f, 100.0f, 0.0f)), physx::PxBoxGeometry(1.0f, 1.0f, 1.0f),
+    physx::PxRigidDynamic* aCubeActor = physx::PxCreateDynamic(*mPhysics, physx::PxTransform(physx::PxVec3(0.0f, 70.0f, 0.0f)), physx::PxBoxGeometry(1.0f, 1.0f, 1.0f),
         *mMaterial, denstiy);
-
 
     if(aCubeActor == nullptr)
     {
-        std::cout << "FATAL ERROR!!: create aCubeActor failed!" << std::endl;
+        std::cout << "PHYSX ERROR!!: create aCubeActor failed!" << std::endl;
         return -1;
     }
-
-    
-
     mScene->addActor(*aCubeActor);
 
-    physx::PxRigidDynamic* aCubeActor2 = physx::PxCreateDynamic(*mPhysics, physx::PxTransform(physx::PxVec3(0.0f, 100.0f, 10.0f)), physx::PxBoxGeometry(1.0f, 1.0f, 1.0f),
+
+    
+    physx::PxRigidDynamic* aCubeActor2 = physx::PxCreateDynamic(*mPhysics, physx::PxTransform(physx::PxVec3(1.0f, 50.0f, 0.0f)), physx::PxBoxGeometry(1.0f, 1.0f, 1.0f),
         *mMaterial, denstiy);
-
-
-    if (aCubeActor == nullptr)
+    if (aCubeActor2 == nullptr)
     {
-        std::cout << "FATAL ERROR!!: create aCubeActor failed!" << std::endl;
+        std::cout << "PHYSX ERROR!!: create aCubeActor failed!" << std::endl;
         return -1;
     }
-
     mScene->addActor(*aCubeActor2);
 
+
+    
     physx::PxRigidStatic* plane = PxCreatePlane(*mPhysics, physx::PxPlane(physx::PxVec3(0, 1, 0), 0), *mMaterial);
     if (plane == nullptr)
     {
@@ -250,58 +248,12 @@ int main()
     }
     mScene->addActor(*plane);
     
+    //PHYSX
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    float ff = 0.0f;
 
     while (!glfwWindowShouldClose(window))
     {
@@ -315,17 +267,6 @@ int main()
         scene->camera->ProcessMouseInput(xpos, ypos);
         scene->camera->Update(deltaTime);
         view = glm::lookAt(scene->camera->position, scene->camera->position + scene->camera->front, scene->camera->up);
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -352,11 +293,7 @@ int main()
 
         scene->gm[5]->SetPosition(1, aPos.x, aPos.y, aPos.z);
         scene->gm[5]->SetRotation(1, glm::degrees(euler.x), glm::degrees(euler.y), glm::degrees(euler.z));
-
-
-
-
-
+        //physx test
 
 
 

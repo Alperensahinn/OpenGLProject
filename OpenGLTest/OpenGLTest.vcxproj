@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Alperen\Desktop\opengl\OpenGLTest\src\ThirdParty;C:\Users\Alperen\Desktop\opengl\OpenGLTest\Libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Alperen\Desktop\opengl\OpenGLTest\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\src\ThirdParty;$(SolutionDir)\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Alperen\Desktop\opengl\OpenGLTest\src\ThirdParty;C:\Users\Alperen\Desktop\opengl\OpenGLTest\Libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Alperen\Desktop\opengl\OpenGLTest\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\src\ThirdParty;$(SolutionDir)\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -1,3 +1,5 @@
+/*This class is based on learnopengl.com tutorials*/
+
 #pragma once
 
 #include <glad/glad.h>
