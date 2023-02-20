@@ -78,7 +78,6 @@ int main()
     }
     
     //Some opengl stuff
-    // /////////////////////////////
     //enables openglErrorHandling
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, 0);
@@ -99,7 +98,6 @@ int main()
     std::cout << glGetString(GL_VERSION) << std::endl;
     glViewport(0, 0, W_WIDTH, W_HEIGHT);
     //Some opengl stuff
-    // /////////////////////////////
 
     //Shader
     Shader shader("src/shader.vert", "src/shader.frag");
