@@ -11,23 +11,23 @@ Scene::Scene(GLFWwindow* window, Shader shader)
     shader.setVec3("light.specular", light->attrib.specular);
     shader.setVec3("lightPos", light->attrib.direction);
     
-    gm.push_back(new GenericDrawableObject("000", window, "Resources/Plane_20x20m.glb", "Resources/ground/forest_ground_04_diff_2k.jpg", "Resources/WoodenPlanks_Specular.png", "Resources/ground/forest_ground_04_nor_gl_2k.jpg"));
+    gm.push_back(new GenericDrawableObject("000", window, "Resources/Plane_20x20m.glb", "Resources/ground/forest_ground_04_diff_2k.jpg", "Resources/GenericSpecularMap_1K.jpg", "Resources/ground/forest_ground_04_nor_gl_2k.jpg"));
     gm[0]->AddInstance(0.0f, 0.0f, 0.0f);
 
-    gm.push_back(new GenericDrawableObject("001", window, "Resources/Walls.glb", "Resources/walls/rough_plaster_03_diff_2k.jpg", "Resources/WoodenPlanks_Specular.png", "Resources/walls/rough_plaster_03_nor_gl_2k.jpg"));
+    gm.push_back(new GenericDrawableObject("001", window, "Resources/Walls.glb", "Resources/walls/rough_plaster_03_diff_2k.jpg", "Resources/GenericSpecularMap_1K.jpg", "Resources/walls/rough_plaster_03_nor_gl_2k.jpg"));
     gm[1]->AddInstance(0.0f, 0.0f, 0.0f);
 
-    gm.push_back(new GenericDrawableObject("002", window, "Resources/Platform01/Platform01_Wall.fbx", "Resources/Platform01/textures/castle_brick_02_red_diff_4k.jpg", "Resources/WoodenPlanks_Specular.png", "Resources/Platform01/textures/castle_brick_02_red_nor_gl_4k.jpg"));
+    gm.push_back(new GenericDrawableObject("002", window, "Resources/Platform01/Platform01_Wall.fbx", "Resources/Platform01/textures/castle_brick_02_red_diff_4k.jpg", "Resources/GenericSpecularMap_1K.jpg", "Resources/Platform01/textures/castle_brick_02_red_nor_gl_4k.jpg"));
     gm[2]->AddInstance(0.0f, 0.0f, 0.0f);
     gm[2]->AddInstance(0.0f, 0.0f, 0.0f);
     gm[2]->SetRotation(1, 0.0f, 180.0f, 0.0f);
 
-    gm.push_back(new GenericDrawableObject("003", window, "Resources/Platform01/Platform01_WoodenFloor.fbx", "Resources/Platform01/textures/wood_planks_dirt_diff_4k.jpg", "Resources/WoodenPlanks_Specular.png", "Resources/Platform01/textures/wood_planks_dirt_nor_gl_4k.jpg"));
+    gm.push_back(new GenericDrawableObject("003", window, "Resources/Platform01/Platform01_WoodenFloor.fbx", "Resources/Platform01/textures/wood_planks_dirt_diff_4k.jpg", "Resources/GenericSpecularMap_1K.jpg", "Resources/Platform01/textures/wood_planks_dirt_nor_gl_4k.jpg"));
     gm[3]->AddInstance(0.0f, 0.0f, 0.0f);
     gm[3]->AddInstance(0.0f, 0.0f, 0.0f);
     gm[3]->SetRotation(1, 0.0f, 180.0f, 0.0f);
 
-    gm.push_back(new GenericDrawableObject("004", window, "Resources/Platform01/Platform01_Pillars.fbx", "Resources/Platform01/textures/castle_brick_02_red_diff_4k.jpg", "Resources/WoodenPlanks_Specular.png", "Resources/Platform01/textures/castle_brick_02_red_nor_gl_4k.jpg"));
+    gm.push_back(new GenericDrawableObject("004", window, "Resources/Platform01/Platform01_Pillars.fbx", "Resources/Platform01/textures/castle_brick_02_red_diff_4k.jpg", "Resources/GenericSpecularMap_1K.jpg", "Resources/Platform01/textures/castle_brick_02_red_nor_gl_4k.jpg"));
     gm[4]->AddInstance(0.0f, 0.0f, 0.0f);
     gm[4]->AddInstance(0.0f, 0.0f, 0.0f);
     gm[4]->SetRotation(1, 0.0f, 180.0f, 0.0f);
@@ -36,7 +36,10 @@ Scene::Scene(GLFWwindow* window, Shader shader)
     gm[5]->AddInstance(0.0f, 100.0f, 0.0f);
     gm[5]->AddInstance(0.0f, 100.f, 10.0f);
 
-
+    gm.push_back(new GenericDrawableObject("005", window, "Resources/Platform01/Platform01_Stairs.fbx", "Resources/Platform01/textures/cracked_concrete_wall_diff_2k.jpg", "Resources/GenericSpecularMap_1K.jpg", "Resources/Platform01/textures/cracked_concrete_wall_nor_gl_2k.jpg"));
+    gm[6]->AddInstance(0.0f, 0.0f, 0.0f);
+    gm[6]->AddInstance(0.0f, 0.0f, 0.0f);
+    gm[6]->SetRotation(1, 0.0f, 180.0f, 0.0f);
 }
 
 Scene::~Scene()

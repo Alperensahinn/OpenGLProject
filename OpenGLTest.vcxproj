@@ -152,7 +152,6 @@
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\STBIMAGE.cpp" />
-    <ClCompile Include="src\StylizedAxe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene.h" />
@@ -169,7 +168,6 @@
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\Texture.h" />
-    <ClInclude Include="src\StylizedAxe.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\DepthShader.frag" />

@@ -6,7 +6,6 @@
 #include "Drawable.h"
 #include <glm/glm.hpp>
 #include "GenericDrawableObject.h"
-#include "StylizedAxe.h"
 #include "Light.h"
 #include "Camera.h"
 #include "DefaultCube.h"

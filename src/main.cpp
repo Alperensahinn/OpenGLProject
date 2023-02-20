@@ -21,7 +21,6 @@
 #include "GameObject.h"
 #include "Camera.h"
 #include "Light.h"
-#include "StylizedAxe.h"
 #include "GenericDrawableObject.h"
 #include "Scene.h"
 
