@@ -36,10 +36,17 @@ Scene::Scene(GLFWwindow* window, Shader shader)
     gm[5]->AddInstance(0.0f, 100.0f, 0.0f);
     gm[5]->AddInstance(0.0f, 100.f, 10.0f);
 
-    gm.push_back(new GenericDrawableObject("005", window, "Resources/Platform01/Platform01_Stairs.fbx", "Resources/Platform01/textures/cracked_concrete_wall_diff_2k.jpg", "Resources/GenericSpecularMap_1K.jpg", "Resources/Platform01/textures/cracked_concrete_wall_nor_gl_2k.jpg"));
+    gm.push_back(new GenericDrawableObject("006", window, "Resources/Platform01/Platform01_Stairs.fbx", "Resources/Platform01/textures/cracked_concrete_wall_diff_2k.jpg", "Resources/GenericSpecularMap_1K.jpg", "Resources/Platform01/textures/cracked_concrete_wall_nor_gl_2k.jpg"));
     gm[6]->AddInstance(0.0f, 0.0f, 0.0f);
     gm[6]->AddInstance(0.0f, 0.0f, 0.0f);
     gm[6]->SetRotation(1, 0.0f, 180.0f, 0.0f);
+
+    gm.push_back(new GenericDrawableObject("007", window, "Resources/wooden_stool/wooden_stool_01.fbx", "Resources/wooden_stool/textures/wooden_stool_01_diff_2k.jpg", "Resources/GenericSpecularMap_1K.jpg", "Resources/wooden_stool/textures/wooden_stool_01_nor_gl_2k.jpg"));
+    gm[7]->AddInstance(0.0f, 0.0f, 5.0f);
+
+    gm.push_back(new GenericDrawableObject("008", window, "Resources/wooden_chair/WoodenChair_01.fbx", "Resources/wooden_chair/textures/WoodenChair_01_diff_2k.jpg", "Resources/GenericSpecularMap_1K.jpg", "Resources/wooden_chair/textures/WoodenChair_01_nor_gl_2k.jpg"));
+    gm[8]->AddInstance(0.0f, 0.0f, 8.0f);
+
 }
 
 Scene::~Scene()

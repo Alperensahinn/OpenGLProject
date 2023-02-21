@@ -165,6 +165,7 @@ int main()
     static physx::PxDefaultAllocator gDefaultAllocatorCallback;
     static physx::PxDefaultErrorCallback gDefaultErrorCallback;
     static physx::PxDefaultCpuDispatcher* mCpuDispatcher;
+    static physx::PxPvd* mPvd;
 
     physx::PxFoundation* mFoundation;
     mFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, gDefaultAllocatorCallback, gDefaultErrorCallback);
@@ -172,9 +173,13 @@ int main()
         std::cout << "PHYSX ERROR!!: PxCreateFoundation failed!" << std::endl;
 
     bool recordMemoryAllocations = true;
-    
+
+    mPvd = physx::PxCreatePvd(*mFoundation);
+    physx::PxPvdTransport* transport = physx::PxDefaultPvdSocketTransportCreate("127.0.0.1", 5425, 10);
+    mPvd->connect(*transport, physx::PxPvdInstrumentationFlag::eALL);
+
     physx::PxPhysics* mPhysics;
-    mPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *mFoundation, physx::PxTolerancesScale(), recordMemoryAllocations);
+    mPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *mFoundation, physx::PxTolerancesScale(), recordMemoryAllocations, mPvd);
     if (!mPhysics) 
     {
         std::cout << "PHYSX ERROR!!: PxCreatePhysics failed!" << std::endl;
@@ -200,6 +205,18 @@ int main()
     mScene = mPhysics->createScene(sceneDesc);
     if (!mScene)
         std::cout << "PHYSX ERROR!!: createScene failed!" << std::endl;
+
+
+    if (!PxInitExtensions(*mPhysics, mPvd))
+        std::cout << "PHYSX ERROR!!: PxInitExtensions failed!" << std::endl;
+
+    physx::PxPvdSceneClient* pvdClient = mScene->getScenePvdClient();
+
+    if(pvdClient)
+    {
+        pvdClient->setScenePvdFlags(physx::PxPvdSceneFlag::eTRANSMIT_CONSTRAINTS | physx::PxPvdSceneFlag::eTRANSMIT_CONTACTS | physx::PxPvdSceneFlag::eTRANSMIT_SCENEQUERIES);
+    }
+
 
 
     //material
