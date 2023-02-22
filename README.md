@@ -1,6 +1,6 @@
 # OpenGLProject
 
-Basic scene renderer made with OpenGL. I'am continue to develop the project.
+Basic scene renderer made with OpenGL. I'am continuing to develop the project.
 
 https://youtu.be/p5OKmkn80rQ
 
