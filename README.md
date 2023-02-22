@@ -2,7 +2,7 @@
 
 Basic scene renderer made with OpenGL. I'am continue to develop the project.
 
-https://youtu.be/oPmIrRPaoFE
+https://youtu.be/p5OKmkn80rQ
 
 ![alt text](https://cdn.discordapp.com/attachments/893869655431716867/1077672398872133694/SS04.PNG)
 ![alt text](https://cdn.discordapp.com/attachments/893869655431716867/1077672398347829278/SS03.PNG)
