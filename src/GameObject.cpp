@@ -38,12 +38,12 @@ void GameObject::SetRotation(unsigned int index, float x, float y, float z)
 	this->modelInstances[index].modelRotation = glm::vec3(x, y, z);
 
 	glm::mat4 tmp = glm::mat4(1.0f);
-
 	tmp = glm::translate(tmp, this->modelInstances[index].modelPosition);
 
-	tmp = glm::rotate(tmp, glm::radians(x), glm::vec3(1.0f, 0.0f, 0.0f));
-	tmp = glm::rotate(tmp, glm::radians(y), glm::vec3(0.0f, 1.0f, 0.0f));
-	tmp = glm::rotate(tmp, glm::radians(z), glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::quat quat = glm::quat(glm::vec3(glm::radians(x), glm::radians(y), glm::radians(z)));
+	glm::mat4 rotation = glm::toMat4(quat);
+
+	tmp = tmp * rotation;
 
 	this->modelInstances[index].model = tmp;
 }
