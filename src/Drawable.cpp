@@ -30,7 +30,7 @@ void Drawable::Draw()
 
 void Drawable::deleteAllocateds()
 {
-	delete this->model;
+	//delete this->model;
 	delete this->material->diffuse;
 	delete this->material->specular;
 	delete this->material->normal;

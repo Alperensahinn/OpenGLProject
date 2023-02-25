@@ -46,7 +46,6 @@ Scene::Scene(GLFWwindow* window, Shader shader)
 
     gm.push_back(new GenericDrawableObject("008", window, "Resources/wooden_chair/WoodenChair_01.fbx", "Resources/wooden_chair/textures/WoodenChair_01_diff_2k.jpg", "Resources/GenericSpecularMap_1K.jpg", "Resources/wooden_chair/textures/WoodenChair_01_nor_gl_2k.jpg"));
     gm[8]->AddInstance(0.0f, 0.0f, 8.0f);
-
 }
 
 Scene::~Scene()

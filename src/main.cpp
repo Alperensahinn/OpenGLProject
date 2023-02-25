@@ -23,6 +23,7 @@
 #include "Light.h"
 #include "GenericDrawableObject.h"
 #include "Scene.h"
+#include "RigidBody.h"
 
 GLFWwindow* window;
 
@@ -117,7 +118,7 @@ int main()
 
 
 
-    //shadow map (no abstraction for first implementationand testing)
+    //shadow map (no abstraction for first implementation and testing)
     Shader simpleDepthShader("src/DepthShader.vert", "src/DepthShader.frag");
     const unsigned int SHADOW_WIDTH = 4096, SHADOW_HEIGHT = 4096;
     unsigned int depthMapFBO;
@@ -158,7 +159,7 @@ int main()
 
 
 
-    //PHYSX (no abstraction for first implementationand testing)
+    //PHYSX (no abstraction for first implementation and testing)
 
 
     //init
@@ -261,6 +262,57 @@ int main()
         return -1;
     }
     mScene->addActor(*plane);
+
+
+
+
+
+
+    RBDesc rbdesc;
+    rbdesc.mPhysics = mPhysics;
+    rbdesc.mCooking = mCooking;
+    rbdesc.mScene = mScene;
+
+    rbdesc.mMaterial = mPhysics->createMaterial(0.5f, 0.5f, 0.05f);
+
+    rbdesc.shape = 1;
+    rbdesc.type = 0;
+    
+    GenericDrawableObject* gdo = dynamic_cast<GenericDrawableObject*>(scene->gm[8]);
+    gdo->AddRigidBody(rbdesc);
+
+
+
+    /*
+    physx::PxRigidDynamic* meshActor = mPhysics->createRigidDynamic(physx::PxTransform(physx::PxVec3(0.0f,0.0f,0.0f)));
+    physx::PxShape* meshShape;
+
+    if (meshActor)
+    {
+        meshActor->setRigidBodyFlag(physx::PxRigidBodyFlag::eKINEMATIC, true);
+
+        physx::PxTriangleMeshGeometry triGeom;
+        triGeom.triangleMesh = convexMesh;
+
+        meshShape = physx::PxRigidActorExt::createExclusiveShape(*meshActor, triGeom,
+            *mMaterial);
+    }
+    */
+    
+    /*
+    physx::PxRigidDynamic* aConvexActor = mPhysics->createRigidDynamic(physx::PxTransform(physx::PxVec3(1.0f, 0.0f, 0.0f)));
+    physx::PxShape* aConvexShape = physx::PxRigidActorExt::createExclusiveShape(*aConvexActor,
+        physx::PxTriangleMeshGeometry(convexMesh), *mMaterial);
+        */
+
+
+
+
+
+
+
+
+
     
     //PHYSX
 

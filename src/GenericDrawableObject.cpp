@@ -5,10 +5,21 @@ GenericDrawableObject::GenericDrawableObject(std::string ID, GLFWwindow* window,
 {
 }
 
+GenericDrawableObject::~GenericDrawableObject()
+{
+	delete rb;
+}
+
 void GenericDrawableObject::SetAttributes(bool update, bool fixedUpdate)
 {
 	this->update = update;
 	this->fixedUpdate = fixedUpdate;
+}
+
+void GenericDrawableObject::AddRigidBody(RBDesc rbDesc)
+{
+	rb = new RigidBody();
+	rb->CreateRigedBody(rbDesc, this);
 }
 
 void GenericDrawableObject::Update()

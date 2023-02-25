@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\RigidBody.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\GenericDrawableObject.cpp" />
     <ClCompile Include="src\Model.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="src\STBIMAGE.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\RigidBody.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\GenericDrawableObject.h" />
     <ClInclude Include="src\Model.h" />

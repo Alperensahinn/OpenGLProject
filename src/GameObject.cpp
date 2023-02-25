@@ -16,17 +16,19 @@ void GameObject::AddInstance(float posX, float posY, float posZ)
 	this->modelInstances.push_back(instance);
 }
 
-void GameObject::SetPosition(unsigned int index,  float x, float y, float z)
+void GameObject::SetPosition(unsigned int index, float x, float y, float z)
 {	
 	this->modelInstances[index].modelPosition = glm::vec3(x, y, z);
 
 	glm::mat4 tmp = glm::mat4(1.0f);
-
 	tmp = glm::translate(tmp, this->modelInstances[index].modelPosition);
 
-	tmp = glm::rotate(tmp, glm::radians(this->modelInstances[index].modelRotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-	tmp = glm::rotate(tmp, glm::radians(this->modelInstances[index].modelRotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-	tmp = glm::rotate(tmp, glm::radians(this->modelInstances[index].modelRotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::quat quat = glm::quat(glm::vec3(
+		glm::radians(this->modelInstances[index].modelRotation.x),
+		glm::radians(this->modelInstances[index].modelRotation.y), 
+		glm::radians(this->modelInstances[index].modelRotation.z)));
+	glm::mat4 rotation = glm::toMat4(quat);
+	tmp = tmp * rotation;
 
 	tmp = glm::scale(tmp, this->modelInstances[index].modelScale);
 
@@ -40,19 +42,35 @@ void GameObject::SetRotation(unsigned int index, float x, float y, float z)
 	glm::mat4 tmp = glm::mat4(1.0f);
 	tmp = glm::translate(tmp, this->modelInstances[index].modelPosition);
 
-	glm::quat quat = glm::quat(glm::vec3(glm::radians(x), glm::radians(y), glm::radians(z)));
+	glm::quat quat = glm::quat(glm::vec3(
+		glm::radians(this->modelInstances[index].modelRotation.x),
+		glm::radians(this->modelInstances[index].modelRotation.y),
+		glm::radians(this->modelInstances[index].modelRotation.z)));
 	glm::mat4 rotation = glm::toMat4(quat);
-
 	tmp = tmp * rotation;
+
+	tmp = glm::scale(tmp, this->modelInstances[index].modelScale);
 
 	this->modelInstances[index].model = tmp;
 }
 
 void GameObject::ScaleModel(unsigned int index, float x, float y, float z)
 {
-	/*
-	this->modelInstances[index] = glm::scale(this->modelInstances[index], glm::vec3(x, y, z));
-	*/
+	this->modelInstances[index].modelScale = glm::vec3(x, y, z);
+
+	glm::mat4 tmp = glm::mat4(1.0f);
+	tmp = glm::translate(tmp, this->modelInstances[index].modelPosition);
+
+	glm::quat quat = glm::quat(glm::vec3(
+		glm::radians(this->modelInstances[index].modelRotation.x),
+		glm::radians(this->modelInstances[index].modelRotation.y),
+		glm::radians(this->modelInstances[index].modelRotation.z)));
+	glm::mat4 rotation = glm::toMat4(quat);
+	tmp = tmp * rotation;
+
+	tmp = glm::scale(tmp, this->modelInstances[index].modelScale);
+
+	this->modelInstances[index].model = tmp;
 }
 
 glm::mat4 GameObject::GetModelTransforms(unsigned int index)
